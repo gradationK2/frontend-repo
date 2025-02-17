@@ -2,7 +2,7 @@ import styled from "styled-components";
 import color from "./color";
 
 export const Common = styled.div`
-  width: 100vw;
+  width: 393px;
   max-width: 100%;
   min-height: 100vh;
   margin: 0 auto;

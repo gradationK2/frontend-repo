@@ -58,6 +58,7 @@ export const Button = styled.button`
   padding: 11px;
   width: 100%;
   margin: 40px 0;
+  cursor: pointer;
 `;
 
 export const SocialLoginBox = styled.div`
@@ -76,6 +77,7 @@ export const SocialLogin = styled.button`
   background-color: white;
   border: none;
   padding: 0;
+  cursor: pointer;
 `;
 
 export const SocialImg = styled.img``;
