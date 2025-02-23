@@ -16,6 +16,7 @@ export const Hr = styled.hr``;
 
 export const Goback = styled.img`
   width: 24px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -62,8 +63,9 @@ export const GoEdit = styled.div`
 `;
 
 export const Trash = styled.img`
-  width: 22px;
-  height: 22px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 `;
 
 export const Delete = styled.div`
@@ -80,6 +82,7 @@ export const Delete = styled.div`
   font-weight: 500;
 
   border-bottom: 1px solid #d9d9d9;
+  cursor: pointer;
 `;
 
 export const ReviewBox = styled.div``;
@@ -164,4 +167,10 @@ export const ReviewMore = styled.div`
 export const Span = styled.div`
   margin-left: 5px;
   text-decoration: underline;
+`;
+
+export const Nodata = styled.div`
+  display: flex;
+  justify-content: center;
+  color: #111111;
 `;

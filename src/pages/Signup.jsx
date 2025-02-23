@@ -1,19 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as A from "../styles/SignupStyle";
 import * as C from "../styles/CommonStyle";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.svg";
+import axiosInstance from "../api/axiosInstance";
 
 function Signup() {
   const navigate = useNavigate();
+
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
     password2: "",
-    language: "",
-    nickname: "",
-    autoLogin: "false",
+    nationality: "",
+    name: "",
   });
+
+  const [emailCheckMessage, setEmailCheckMessage] = useState("");
 
   const handleChange = (e) => {
     setFormValue((prevValue) => {
@@ -24,6 +27,93 @@ function Signup() {
       };
     });
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { email, password, password2, nationality, name } = formValue;
+
+    // 중복 확인 진행이 안 됐을 경우
+
+    // 입력을 다 하지 않았을 경우
+    if (!email || !password || !password2 || !nationality || !name) {
+      alert("입력하지 않은 내용이 있습니다.");
+      return;
+    }
+    // 비밀번호가 다를 경우
+    if (password !== password2) {
+      alert("비밀번호가 다릅니다.");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post(
+        "/api/auth/signup",
+        {
+          name,
+          email,
+          password,
+          nationality,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json", // JSON 요청 명시
+          },
+        }
+      );
+
+      const data = response.data;
+
+      if (data) {
+        console.log("회원가입 성공");
+        navigate("/login");
+      } else {
+        alert("회원가입에 실패했습니다.");
+      }
+    } catch (error) {
+      console.log(process.env.REACT_APP_BASE_API_URL);
+
+      console.error("에러 발생:", error);
+    }
+  };
+
+  // 국적 드롭다운
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const onClick = (e) => {
+      if (ref.current !== null && !ref.current.contains(e.target)) {
+        setIsOpen(!isOpen);
+      }
+    };
+    if (isOpen) {
+      window.addEventListener("click", onClick);
+    }
+
+    return () => {
+      window.removeEventListener("click", onClick);
+    };
+  }, [isOpen]);
+
+  const UsableEmail = async () => {
+    try {
+      const response = await axiosInstance.get("/api/auth/check-email", {
+        params: { email: formValue.email },
+      });
+
+      console.log("서버 응답:", response.data);
+
+      if (response.data?.message === "이미 사용 중인 이메일입니다." || response.data?.message === "사용 가능한 이메일입니다.") {
+        setEmailCheckMessage(response.data.message);
+      } else {
+        setEmailCheckMessage("이메일 확인 중 오류가 발생했습니다.");
+      }
+    } catch (error) {
+      console.error("이메일 중복 확인 실패", error);
+      setEmailCheckMessage("이메일 확인 중 오류가 발생했습니다.");
+    }
+  };
+
   return (
     <C.Common>
       <A.Signup>
@@ -33,8 +123,9 @@ function Signup() {
           <A.Text>아이디(이메일)</A.Text>
           <A.InputDetailBox>
             <A.Input type="email" name="email" value={formValue.email} onChange={handleChange} />
-            <A.UsableBtn>중복확인</A.UsableBtn>
+            <A.UsableBtn onClick={UsableEmail}>중복확인</A.UsableBtn>
           </A.InputDetailBox>
+          <A.SignupInfo>{emailCheckMessage}</A.SignupInfo>
         </A.InputBox>
         <A.InputBox>
           <A.Text>비밀번호</A.Text>
@@ -51,17 +142,25 @@ function Signup() {
         <A.InputBox>
           <A.Text>국적(언어)</A.Text>
           <A.InputDetailBox>
-            <A.Input type="text" name="language" value={formValue.language} onChange={handleChange} />
+            <A.Select name="nationality" value={formValue.nationality} onChange={handleChange}>
+              <option value="">언어를 선택하세요</option>
+              <option value="korea">한국어</option>
+              <option value="america">English</option>
+              {/* <option value="jp">日本語</option>
+              <option value="zh">中文</option>
+              <option value="fr">Français</option> */}
+            </A.Select>
           </A.InputDetailBox>
         </A.InputBox>
         <A.InputBox>
           <A.Text>닉네임</A.Text>
           <A.InputDetailBox>
-            <A.Input type="text" name="nickname" value={formValue.nickname} onChange={handleChange} placeholder="(필수)" />
+            <A.Input type="text" name="name" value={formValue.name} onChange={handleChange} placeholder="(필수)" />
             <A.UsableBtn>중복확인</A.UsableBtn>
           </A.InputDetailBox>
+          <A.SignupInfo>사용 가능한 닉네임입니다.</A.SignupInfo>
         </A.InputBox>
-        <A.Button>가입하기</A.Button>
+        <A.Button onClick={handleSubmit}>가입하기</A.Button>
       </A.Signup>
     </C.Common>
   );

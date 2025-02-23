@@ -20,6 +20,7 @@ export const Hr = styled.hr`
 
 export const Goback = styled.img`
   width: 24px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -67,7 +68,6 @@ export const BadgeBox = styled.div`
   border-radius: 8px;
   margin-bottom: 10vh;
   overflow-x: hidden;
-  overflow-y: scroll;
 `;
 
 export const Badges = styled.div`
@@ -78,6 +78,13 @@ export const Badges = styled.div`
   align-items: center;
   justify-content: start;
   gap: 30px;
+  overflow-y: scroll;
+  //스크롤바 안 보이게 하는 코드
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const Badge = styled.div`
@@ -104,4 +111,11 @@ export const BadgeInfo = styled.div`
   font-family: Pretendard;
   font-size: 10px;
   font-weight: 500;
+`;
+
+export const Nodata = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  color: #111111;
 `;

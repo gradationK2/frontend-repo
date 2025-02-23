@@ -10,7 +10,7 @@ import circle from "../assets/circle.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import axiosInstance from "../api/axiosInstance";
 
-function MyReview() {
+function ReviewAll() {
   const location = useLocation();
   const { userId, userPhoto, userName } = location.state || {};
   const navigate = useNavigate();
@@ -50,20 +50,11 @@ function MyReview() {
       const response = await axiosInstance.delete("/reviews/del-all", {
         data: { user_id: userId }, // 요청 본문에 review_id 포함
       });
-
       setReviewItems([]);
       console.log(response.data.message); // 삭제 완료 메시지 확인
     } catch (error) {
       console.error("리뷰 삭제 중 오류 발생", error);
     }
-  };
-
-  const goEdit = () => {
-    navigate("/Profile");
-  };
-
-  const goReviews = () => {
-    navigate("/ReviewAll", { state: { userId } });
   };
 
   const goBack = () => {
@@ -79,24 +70,14 @@ function MyReview() {
         </A.Header>
         <A.Hr />
 
-        <A.MyInfoBox>
-          <A.MyPhoto src={img} />
-          <A.MyInfo>
-            <A.Name>{userName}</A.Name>
-            <A.GoEdit onClick={goEdit}>개인정보수정</A.GoEdit>
-          </A.MyInfo>
-        </A.MyInfoBox>
-
-        {reviewItems.length > 0 ? (
+        {reviewItems.length > 0 && (
           <A.Delete onClick={DeleteAllReview}>
             모두 삭제 <A.Trash src={Trash} />
           </A.Delete>
-        ) : (
-          <A.Nodata>작성한 리뷰가 없습니다.</A.Nodata>
         )}
 
         <A.ReviewBox>
-          {reviewItems.slice(0, 3).map((review) => (
+          {reviewItems.map((review) => (
             <A.Review key={review.id}>
               <A.Top>
                 <A.FoodName>
@@ -114,15 +95,9 @@ function MyReview() {
             </A.Review>
           ))}
         </A.ReviewBox>
-
-        {reviewItems.length > 3 && (
-          <A.ReviewMore onClick={goReviews}>
-            + Review <A.Span>{reviewItems.length}</A.Span>
-          </A.ReviewMore>
-        )}
       </A.MyReview>
     </C.Common>
   );
 }
 
-export default MyReview;
+export default ReviewAll;

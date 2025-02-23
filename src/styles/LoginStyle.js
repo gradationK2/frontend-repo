@@ -37,6 +37,19 @@ export const Input = styled.input`
   background-color: #f7f7f7;
   padding: 10px 20px;
   font-size: 16px;
+  /* 자동 완성된 상태에서 배경 제거 */
+  &:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px #f7f7f7 inset !important;
+    -webkit-text-fill-color: black !important;
+  }
+
+  /* 자동 완성 시 포커스 상태에서도 유지 */
+  &:-webkit-autofill:focus {
+    box-shadow: 0 0 0px 1000px white inset !important;
+    -webkit-box-shadow: 0 0 0px 1000px #f7f7f7 inset !important;
+    -webkit-text-fill-color: black !important;
+  }
 `;
 
 export const Check = styled.input``;
@@ -81,3 +94,7 @@ export const SocialLogin = styled.button`
 `;
 
 export const SocialImg = styled.img``;
+
+export const goSignup = styled.div`
+  cursor: pointer;
+`;

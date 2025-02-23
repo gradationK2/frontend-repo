@@ -5,23 +5,70 @@ import * as C from "../styles/CommonStyle";
 import logo from "../assets/logo.svg";
 import google from "../assets/Google.svg";
 import apple from "../assets/Apple.svg";
+import axiosInstance from "../api/axiosInstance";
 
 function Login() {
   const navigate = useNavigate();
+  const API_URL = process.env.REACT_APP_BASE_API_URL;
+
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
-    autoLogin: "false",
   });
 
   const handleChange = (e) => {
-    setFormValue((prevValue) => {
-      const { name, value } = e.target;
-      return {
-        ...prevValue,
-        [name]: value,
-      };
-    });
+    const { name, value, type, checked } = e.target;
+    setFormValue((prevValue) => ({
+      ...prevValue,
+      [name]: type === "checkbox" ? checked : value, // 체크박스일 경우 checked 값 사용
+    }));
+  };
+
+  const handleSubmit = async () => {
+    const { email, password, autoLogin } = formValue;
+
+    if (!email || !password) {
+      alert("이메일과 비밀번호를 모두 입력해주세요.");
+      return;
+    }
+
+    try {
+      const response = await axiosInstance.post(
+        "/api/auth/login",
+        { email, password },
+        {
+          withCredentials: true, // 쿠키 포함 여부
+        }
+      );
+
+      //성공 시 토큰 발급
+      const token = response.data;
+
+      if (token) {
+        console.log("로그인 성공");
+
+        if (autoLogin) {
+          localStorage.setItem("token", token); // 자동 로그인 체크 시 localStorage에 저장
+          console.log(localStorage.getItem);
+        } else {
+          sessionStorage.setItem("token", token); // 일반 로그인 시 sessionStorage에 저장
+        }
+
+        navigate("/main");
+      } else {
+        console.log("로그인에 실패했습니다");
+      }
+    } catch (error) {
+      alert("로그인 중 오류가 발생했습니다.");
+    }
+  };
+
+  const goSignup = () => {
+    navigate("/signup");
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = `${API_URL}/oauth2/authorization/google`;
   };
 
   return (
@@ -40,12 +87,11 @@ function Login() {
           <A.Check type="checkbox" name="autoLogin" value={formValue.autoLogin} onChange={handleChange} />
           <A.Text>자동 로그인</A.Text>
         </A.CheckBox>
-        <A.Button>로그인하기</A.Button>
-        <A.Text>회원가입하기</A.Text>
-        {/* onClick={goSignup} */}
+        <A.Button onClick={handleSubmit}>로그인하기</A.Button>
+        <A.goSignup onClick={goSignup}>회원가입하기</A.goSignup>
 
         <A.SocialLoginBox>
-          <A.SocialLogin>
+          <A.SocialLogin onClick={handleGoogleLogin}>
             <A.SocialImg src={google} />
           </A.SocialLogin>
           <A.SocialLogin>
