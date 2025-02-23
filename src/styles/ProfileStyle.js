@@ -22,6 +22,7 @@ export const Header = styled.div`
 export const Goback = styled.img`
   width: 24px;
   margin-right: 101px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -37,8 +38,18 @@ export const ProfileBox = styled.div`
   align-items: center;
 `;
 
-export const Photo = styled.img`
+export const Photo = styled.div`
   margin-bottom: 16px;
+`;
+
+export const PhotoImg = styled.img``;
+
+export const PhotoInput = styled.input`
+  display: none;
+`;
+
+export const PhotoLabel = styled.label`
+  cursor: pointer;
 `;
 
 export const SmallBtn = styled.div`
@@ -54,6 +65,7 @@ export const SmallBtn = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 5px;
+  cursor: pointer;
 `;
 
 export const InputBox = styled.div`
@@ -71,8 +83,23 @@ export const Input = styled.input`
   border: none;
   border-radius: 30px;
   outline: none;
+  background-color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #717171;
+`;
+
+export const Email = styled.div`
+  width: calc(100% - 40px);
+  height: 20px;
+  border: none;
+  border-radius: 30px;
+  outline: none;
   background-color: #f7f7f7;
   padding: 10px 20px;
+  font-size: 16px;
+  font-family: Pretendard;
+  color: #686868;
   font-size: 16px;
 `;
 
@@ -80,6 +107,24 @@ export const Text = styled.div`
   font-family: Pretendard;
   color: #686868;
   font-size: 16px;
+`;
+
+export const InputDetailBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100% - 40px);
+  height: 20px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  border: 1px solid #717171;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  border: none;
+  outline: none;
 `;
 
 export const Button = styled.div`
@@ -92,4 +137,5 @@ export const Button = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `;

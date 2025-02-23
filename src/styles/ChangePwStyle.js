@@ -15,6 +15,7 @@ export const Header = styled.div`
 
 export const Goback = styled.img`
   width: 24px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -63,4 +64,5 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   margin-top: 77px;
+  cursor: pointer;
 `;

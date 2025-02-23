@@ -20,6 +20,7 @@ export const Hr = styled.hr`
 
 export const Goback = styled.img`
   width: 24px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -71,6 +72,14 @@ export const GoEdit = styled.div`
   cursor: pointer;
 `;
 
+export const GoLogin = styled.div`
+  color: #818181;
+  font-family: Pretendard;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+`;
+
 export const BadgeBox = styled.div`
   padding: 20px;
   display: flex;
@@ -79,6 +88,7 @@ export const BadgeBox = styled.div`
   gap: 30px;
   border-radius: 8px;
   border: 1px solid var(--trendy-ton, #ff6e30);
+  cursor: pointer;
 `;
 
 export const MyBadge = styled.img``;
@@ -115,6 +125,7 @@ export const Activity = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  cursor: pointer;
 `;
 
 export const Text = styled.div`

@@ -21,6 +21,7 @@ export const Hr = styled.hr`
 
 export const Goback = styled.img`
   width: 24px;
+  cursor: pointer;
 `;
 
 export const Title = styled.div`
@@ -36,16 +37,19 @@ export const Title = styled.div`
 
 export const LikeBox = styled.div`
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 8px;
+  justify-content: center;
+  gap: 3vw;
 `;
 
-export const Food = styled.div``;
+export const Food = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+`;
 
 export const ImgBox = styled.div`
-  width: 109px;
-  height: 117px;
+  width: 100px;
+  height: 110px;
   background: #f7f7f7;
 
   display: flex;
@@ -53,15 +57,29 @@ export const ImgBox = styled.div`
   align-items: center;
 `;
 
-export const FoodImg = styled.img``;
+export const FoodImg = styled.img`
+  width: 66px;
+`;
 
 export const FoodLike = styled.div`
-  width: 99px;
+  width: 90px;
   padding: 5px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Name = styled.div``;
 
-export const LikeCheck = styled.img``;
+export const LikeCheck = styled.img`
+  width: 14px;
+  cursor: pointer;
+`;
+
+export const Nodata = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5vh;
+`;

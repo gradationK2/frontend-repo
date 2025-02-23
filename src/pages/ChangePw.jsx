@@ -22,11 +22,15 @@ function ChangePw() {
     });
   };
 
+  const goBack = () => {
+    navigate(-1);
+  };
+
   return (
     <C.Common>
       <A.ChangePw>
         <A.Header>
-          <A.Goback src={forward} />
+          <A.Goback src={forward} onClick={goBack} />
           <A.Title>개인정보수정</A.Title>
         </A.Header>
         <A.InputBox>

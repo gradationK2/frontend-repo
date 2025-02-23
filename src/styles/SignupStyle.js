@@ -49,10 +49,23 @@ export const InputDetailBox = styled.div`
   border: 1px solid #717171;
 `;
 
+export const SignupInfo = styled.div`
+  background: var(--trendy-ton, linear-gradient(90deg, #ff6e30 0%, #e9402b 100%));
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 export const Input = styled.input`
   font-size: 16px;
   border: none;
 
+  outline: none;
+`;
+
+export const Select = styled.select`
+  width: 100%;
+  border: none;
   outline: none;
 `;
 
