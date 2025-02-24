@@ -43,15 +43,17 @@ function Login() {
 
       //성공 시 토큰 발급
       const token = response.data;
+      console.log(response);
 
       if (token) {
         console.log("로그인 성공");
 
         if (autoLogin) {
-          localStorage.setItem("token", token); // 자동 로그인 체크 시 localStorage에 저장
+          localStorage.setItem("refreshToken", token.refreshToken); // 자동 로그인 체크 시 localStorage에 저장
+          localStorage.setItem("accessToken", token.accessToken);
           console.log(localStorage.getItem);
         } else {
-          sessionStorage.setItem("token", token); // 일반 로그인 시 sessionStorage에 저장
+          localStorage.setItem("accessToken", token.accessToken); // 일반 로그인 시 sessionStorage에 저장
         }
 
         navigate("/main");
