@@ -48,7 +48,9 @@ function Review() {
         <div className="name">리뷰</div>
       </A.Header>
       <A.Review>
-        <div className="title">reviews <span>{reviews.length}</span></div>
+        <div className="title">
+          <p>reviews <span>{reviews.length}</span></p>
+          </div>
 
         {reviews.map((review) => (
           <A.ReviewItem key={review.id}>

@@ -39,6 +39,11 @@ align-items: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    img{
+    width: 164px;
+    height: 145px;
+    object-fit: contain;
+    }
 }
 
 `;
@@ -68,13 +73,14 @@ export const Info = styled.div`
     position: relative;
     padding: 0 25px ;
    .food-title {
+    margin-top: 15px;
     display: flex;
     justify-self: baseline;
   }
   .detail_info{
     color: #767676;
     font-size: 14px;
-    margin: 5px 0;
+    margin:15px 0;
     font-weight: 600;
   }
   .spicy{

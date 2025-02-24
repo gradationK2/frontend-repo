@@ -9,8 +9,8 @@ const Header = () => {
     return (
         <C.Header>
             <img src={SearchIcon} alt="" onClick={() => navigate('/search')}/>
-            <img src={Logo} alt="" className="logo"  />
-            <img src={User} alt="" />
+            <img src={Logo} alt="" className="logo" onClick={() => navigate('/main')} />
+            <img src={User} alt="" onClick={() => navigate('/mypage')} />
         </C.Header>
     )
 }

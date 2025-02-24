@@ -3,30 +3,34 @@ import color from "./color";
 
 export const Review = styled.div`
     margin: 0 auto;
-    width: 393px;
+    width: 100%;
     .title{
         width: 100%;
         height: 40px;
         background-color: ${color.gray};
-        padding:0 20px ;
+        padding:0  ;
         display: flex;
         align-items: center;
         font-size: 14px;
 
          font-weight: 700;
-        
-        >span{
+         p{
+            margin-left: 20px;
+            >span{
             background: ${color.gradation}; 
             -webkit-background-clip: text; 
             color: transparent;
             margin-left: 5px;
             font-weight: normal;
         }
+         }
+        
+        
     }
 `;
 
 export const Header = styled.div`
-   width: 393px;
+   width: 100%;
    margin: 0 auto;
     height: 60px;
     display: flex;
