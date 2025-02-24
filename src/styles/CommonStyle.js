@@ -2,7 +2,7 @@ import styled from "styled-components";
 import color from "./color";
 
 export const Common = styled.div`
-  width: 100vw;
+  width: 393px;
   max-width: 100%;
   min-height: 100vh;
   margin: 0 auto;
@@ -13,24 +13,21 @@ export const Common = styled.div`
 `;
 
 export const Header = styled.div`
-   width: 393px;
-   margin: 0 auto;
-    height: 60px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    
-    .logo{
-        width: 154px;
-    }
-`
+  width: 393px;
+  margin: 0 auto;
+  height: 60px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .logo {
+    width: 154px;
+  }
+`;
 
 export const Footer = styled.div`
-  
-   margin: 20px auto;
-    display: flex;
-    color: #818181;
-    font-size: 10px;
-
-    
-`
+  margin: 20px auto;
+  display: flex;
+  color: #818181;
+  font-size: 10px;
+`;

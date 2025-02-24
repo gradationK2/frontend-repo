@@ -121,12 +121,6 @@ export const InputDetailBox = styled.div`
   border: 1px solid #717171;
 `;
 
-export const Select = styled.select`
-  width: 100%;
-  border: none;
-  outline: none;
-`;
-
 export const Button = styled.div`
   margin: 181px 25px 20px;
   width: 342px;
@@ -138,4 +132,15 @@ export const Button = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+`;
+
+export const Select = styled.select`
+  position: absolute;
+  width: 300px;
+  border: none;
+  outline: none;
+`;
+
+export const Option = styled.option`
+  width: 300px;
 `;

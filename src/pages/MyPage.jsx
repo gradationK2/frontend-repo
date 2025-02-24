@@ -14,10 +14,7 @@ function MyPage() {
   useEffect(() => {
     const fetchUserProfile = async () => {
       try {
-        console.log(1);
-
         const response = await axiosInstance.get("/api/user/me");
-        console.log(2);
 
         setUser(response.data);
         console.log("사용자 정보", response);
@@ -31,9 +28,14 @@ function MyPage() {
 
   const handleLogout = async () => {
     try {
-      await axiosInstance.post("/api/auth/logout", { userId: user?.id });
+      const refreshToken = localStorage.getItem("refreshToken") || sessionStorage.getItem("refreshToken");
+      await axiosInstance.post("/api/auth/logout", { refreshToken: refreshToken });
+
+      sessionStorage.removeItem("refreshToken");
+      sessionStorage.removeItem("accessToken");
       localStorage.removeItem("refreshToken");
       localStorage.removeItem("accessToken");
+
       console.log("로그아웃 성공");
       navigate("/main");
     } catch (error) {
