@@ -96,7 +96,7 @@ function MyPage() {
         </A.MyInfoBox>
         <A.Main>
           <A.BadgeBox onClick={goNextBadge}>
-            <A.MyBadge src={badge} />
+            <A.MyPhoto src={user?.badgeImagePath ? `${process.env.REACT_APP_BASE_API_URL}${user.badgeImagePath}` : badge} />
 
             {user ? (
               <>

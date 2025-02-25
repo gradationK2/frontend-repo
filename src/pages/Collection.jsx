@@ -51,7 +51,6 @@ function Collection() {
             {badgeItems.length > 0 ? (
               badgeItems.map((badge, index) => (
                 <A.Badge key={index}>
-                  {/* 배찌 이미지 안 불러와져서 임의로 프론트에서 넣음 */}
                   <A.BadgeImg src={`${BASE_URL}${badge.imagePath}` || badgeImg} alt={badge.name} />
                   <A.BadgeTitle>{badge.name}</A.BadgeTitle>
                 </A.Badge>
