@@ -3,6 +3,7 @@ import * as C from "../../styles/CommonStyle";
 import * as A from "../../styles/SearchStyle";
 import searchIcon from "../../assets/main/Search.svg";
 import { useNavigate } from "react-router-dom";
+import Forward from "../../assets/main/Forward.svg"
 import axios from "axios";
 
 
@@ -16,7 +17,7 @@ function Search() {
       .get("/api/food", { params: { sort: "popular" } })
       .then((response) => {
         if (response.status === 200) {
-          setPopular(response.data.slice(0, 5)); 
+          setPopular(response.data.slice(0, 5));
         }
       })
       .catch((error) => {
@@ -41,14 +42,17 @@ function Search() {
     <C.Common>
       <A.Search>
         <A.SearchBar>
-          <img src={searchIcon} alt="검색" onClick={handleSearch} />
-          <input
-            type="text"
-            placeholder="검색어를 입력하세요"
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            onKeyDown={handleKeyDown}
-          />
+          <div className="back" onClick={() => navigate(-1)}> <img src={Forward} alt="" /> </div>
+          <div className="search">
+            <img src={searchIcon} alt="검색" onClick={handleSearch} />
+            <input
+              type="text"
+              placeholder="검색어를 입력하세요"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+          </div>
         </A.SearchBar>
 
         <A.Ranking>

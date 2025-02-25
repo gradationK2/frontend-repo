@@ -13,14 +13,14 @@ function WriteReview() {
   const navigate = useNavigate();
   const location = useLocation();
   const { foodId, foodName } = location.state || {};
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
 
   const [selectedImages, setSelectedImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSpicy, setSelectedSpicy] = useState(0);
   const [reviewContent, setReviewContent] = useState("");
-
+const [nulimg , setNulimg ] = useState(null);
   const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
@@ -67,7 +67,7 @@ function WriteReview() {
         formData.append("image", file);
       });
     } else {
-      formData.append("image", "null");
+      formData.append("image",nulimg);
     }
 
     try {

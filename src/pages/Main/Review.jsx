@@ -15,7 +15,7 @@ import axios from "axios";
 function Review() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
 
   const [reviews, setReviews] = useState([]);
 
@@ -25,7 +25,6 @@ function Review() {
         .get(`/reviews/food/${id}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           setReviews(response.data.reviews);
-          console.log(response.data.reviews);
         })
         .catch((error) => {
           console.error("리뷰를 가져오는 중 오류 발생:", error);
@@ -177,7 +176,9 @@ function Review() {
         {reviews.map((review) => (
           <A.ReviewItem key={review.id}>
             <div className="profile">
-              <img src={profil} alt="프로필" />
+
+              <img src={review.member?.photoUrl || profil} alt={review.member?.name} />
+
               <div className="name">
                 {review.member?.name}{" "}
                 <span className="day">
