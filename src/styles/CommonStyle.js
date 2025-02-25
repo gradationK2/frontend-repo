@@ -19,7 +19,9 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-around;
   align-items: center;
-
+img{
+  cursor: pointer;
+}
   .logo {
     width: 154px;
   }

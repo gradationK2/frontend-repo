@@ -53,7 +53,7 @@ export const Header = styled.div`
 export const ReviewItem = styled.div`
     padding: 25px;
     position: relative;
-    
+
     border-bottom: 3px solid ${color.gray};
     .images{
         margin: 15px 0;
@@ -76,8 +76,11 @@ export const ReviewItem = styled.div`
             align-items: center;
             gap: 5px;
             margin-bottom: 5px;
-            img{
+              img{
                 width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                object-fit: fill;
             }
             .name{
                 font-size: 16px;

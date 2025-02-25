@@ -36,7 +36,7 @@ position: relative;
 `;
 export const Sortlist = styled.div`
   position: absolute;
-  z-index: 10;
+  z-index: 100;
   width: fit-content;
   display: flex;
   top: 110px;
