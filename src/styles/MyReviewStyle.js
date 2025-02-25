@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MyReview = styled.div`
-  margin-top: 5vh;
+  margin-top: 2vh;
 `;
 
 export const Header = styled.div`
@@ -38,7 +38,9 @@ export const MyInfoBox = styled.div`
   gap: 20px;
 `;
 
-export const MyPhoto = styled.img``;
+export const MyPhoto = styled.img`
+  width: 76px;
+`;
 
 export const MyInfo = styled.div`
   display: flex;

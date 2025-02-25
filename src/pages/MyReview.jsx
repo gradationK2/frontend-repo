@@ -12,9 +12,31 @@ import axiosInstance from "../api/axiosInstance";
 
 function MyReview() {
   const location = useLocation();
-  const { userId, userPhoto, userName } = location.state || {};
+  const userId = location.state?.userId;
+  const [formValue, setFormValue] = useState({
+    name: "",
+    profileImageFile: "",
+  });
+
   const navigate = useNavigate();
   const [reviewItems, setReviewItems] = useState([]);
+
+  useEffect(() => {
+    const fetchFormValue = async () => {
+      try {
+        const response = await axiosInstance.get("/api/user/me");
+        setFormValue({
+          ...response.data,
+          image: response.data.profileImagePath || "", // 서버에서 받은 이미지 경로를 image에 저장
+        });
+        console.log("프로필", response.data);
+      } catch (error) {
+        console.error("프로필 목록을 불러오는 중 오류 발생", error);
+      }
+    };
+
+    fetchFormValue();
+  }, []);
 
   useEffect(() => {
     const fetchReviewItems = async () => {
@@ -80,9 +102,10 @@ function MyReview() {
         <A.Hr />
 
         <A.MyInfoBox>
-          <A.MyPhoto src={img} />
+          <A.MyPhoto src={formValue.image || img} />
+
           <A.MyInfo>
-            <A.Name>{userName}</A.Name>
+            <A.Name>{formValue.name}</A.Name>
             <A.GoEdit onClick={goEdit}>개인정보수정</A.GoEdit>
           </A.MyInfo>
         </A.MyInfoBox>

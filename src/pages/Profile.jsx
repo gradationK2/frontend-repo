@@ -9,19 +9,20 @@ import axiosInstance from "../api/axiosInstance";
 function Profile() {
   const navigate = useNavigate();
   const [formValue, setFormValue] = useState({
-    email: "",
-    userId: "",
     name: "",
     nationality: "",
-    profileImagePath: "",
+    profileImageFile: "",
   });
 
   useEffect(() => {
     const fetchFormValue = async () => {
       try {
         const response = await axiosInstance.get("/api/user/me");
-        setFormValue(response.data);
-        console.log("프로필 목록", response.data);
+        setFormValue({
+          ...response.data,
+          image: response.data.profileImagePath || "", // 서버에서 받은 이미지 경로를 image에 저장
+        });
+        console.log("프로필", response.data);
       } catch (error) {
         console.error("프로필 목록을 불러오는 중 오류 발생", error);
       }
@@ -38,6 +39,21 @@ function Profile() {
         [name]: value,
       };
     });
+  };
+
+  const handleImgChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormValue((prev) => ({
+          ...prev,
+          image: reader.result, // 미리보기용 Base64 URL
+          profileImageFile: file, // 파일 객체 저장 (업로드용)
+        }));
+      };
+      reader.readAsDataURL(file); // Base64 변환
+    }
   };
 
   const [isOpen, setIsOpen] = useState(false);
@@ -58,15 +74,37 @@ function Profile() {
     };
   }, [isOpen]);
 
-  const handleSubmit = async () => {
-    console.log("보내는 데이터:", formValue);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", formValue.name);
+    formData.append("nationality", formValue.nationality);
+
+    if (formValue.profileImageFile) {
+      formData.append("image", formValue.profileImageFile);
+      console.log("파일 타입 확인:", formValue.profileImageFile);
+    }
+
+    console.log("보낼 데이터 확인:", formData.get("name"), formData.get("nationality"), formData.get("image"));
+
     try {
-      await axiosInstance.put("/api/user/me", formValue);
+      const response = await axiosInstance.put("/api/user/me", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      console.log("업로드 성공!", response.data);
+
+      setFormValue((prev) => ({
+        ...prev,
+        image: response.data.profileImagePath || prev.image, // 서버에서 받은 이미지 경로 업데이트
+        profileImageFile: null,
+      }));
+
       alert("수정이 완료되었습니다.");
       navigate(-1);
     } catch (error) {
-      console.error("프로필 업데이트 중 오류 발생", error);
-      alert("수정 중 오류가 발생했습니다.");
+      console.error("에러 발생:", error.response ? error.response.data : error);
     }
   };
 
@@ -89,9 +127,9 @@ function Profile() {
 
           <A.ProfileBox>
             <A.Photo>
-              <A.PhotoInput type="file" id="image_upload" accept="image/*" onChange={handleChange} />
+              <A.PhotoInput type="file" id="image_upload" accept="image/*" onChange={handleImgChange} />
               <A.PhotoLabel htmlFor="image_upload">
-                <A.PhotoImg src={formValue.profile_photo || basicImg} />
+                <A.PhotoImg src={formValue.image || basicImg} />
               </A.PhotoLabel>
             </A.Photo>
 
@@ -112,12 +150,9 @@ function Profile() {
           <A.Text>국적(언어)</A.Text>
           <A.InputDetailBox>
             <A.Select name="nationality" value={formValue.nationality} onChange={handleChange}>
-              <option value="">언어를 선택하세요</option>
-              <option value="ko">한국어</option>
-              <option value="en">English</option>
-              {/* <option value="jp">日本語</option>
-              <option value="zh">中文</option>
-              <option value="fr">Français</option> */}
+              <A.Option value="">언어를 선택하세요</A.Option>
+              <A.Option value="ko">한국어</A.Option>
+              <A.Option value="en">English</A.Option>
             </A.Select>
           </A.InputDetailBox>
         </A.InputBox>

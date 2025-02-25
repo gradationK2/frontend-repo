@@ -9,7 +9,6 @@ import axiosInstance from "../api/axiosInstance";
 
 function Login() {
   const navigate = useNavigate();
-  const API_URL = process.env.REACT_APP_BASE_API_URL;
 
   const [formValue, setFormValue] = useState({
     email: "",
@@ -53,7 +52,8 @@ function Login() {
           localStorage.setItem("accessToken", token.accessToken);
           console.log(localStorage.getItem);
         } else {
-          localStorage.setItem("accessToken", token.accessToken); // 일반 로그인 시 sessionStorage에 저장
+          sessionStorage.setItem("refreshToken", token.refreshToken);
+          sessionStorage.setItem("accessToken", token.accessToken); // 일반 로그인 시 sessionStorage에 저장
         }
 
         navigate("/main");
@@ -70,7 +70,7 @@ function Login() {
   };
 
   const handleGoogleLogin = () => {
-    window.location.href = `${API_URL}/oauth2/authorization/google`;
+    window.location.href = "https://www.asd1.store/oauth2/authorization/google";
   };
 
   return (
@@ -95,9 +95,6 @@ function Login() {
         <A.SocialLoginBox>
           <A.SocialLogin onClick={handleGoogleLogin}>
             <A.SocialImg src={google} />
-          </A.SocialLogin>
-          <A.SocialLogin>
-            <A.SocialImg src={apple} />
           </A.SocialLogin>
         </A.SocialLoginBox>
       </A.Login>
