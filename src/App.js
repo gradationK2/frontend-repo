@@ -39,7 +39,7 @@ function App() {
         <Route path="like" element={<Like />} />
         <Route path="collection" element={<Collection />} />
         <Route path="nextCollection" element={<NextCollection />} />
-        <Route path="/auth/callback" element={<GoogleCallback />} />
+        <Route path="/login/success" element={<GoogleCallback />} />
       </Routes>
     </BrowserRouter>
   );

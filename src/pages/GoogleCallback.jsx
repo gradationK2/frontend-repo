@@ -13,14 +13,18 @@ function LoginSuccess() {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       console.log("소셜 로그인 성공, 토큰 저장 완료");
-      navigate("/main");
+
+      // 1초 후 메인 화면으로 이동
+      setTimeout(() => {
+        navigate("/main");
+      }, 1000);
     } else {
       alert("로그인 실패!");
-      navigate("/login");
+      navigate("/login-failed");
     }
   }, [navigate]);
 
-  return <div>로그인 중...</div>;
+  return <div>로그인 중... 잠시만 기다려 주세요.</div>;
 }
 
 export default LoginSuccess;
