@@ -42,7 +42,9 @@ export const Photo = styled.div`
   margin-bottom: 16px;
 `;
 
-export const PhotoImg = styled.img``;
+export const PhotoImg = styled.img`
+  width: 80px;
+`;
 
 export const PhotoInput = styled.input`
   display: none;

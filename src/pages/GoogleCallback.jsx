@@ -17,10 +17,10 @@ function LoginSuccess() {
       // 1초 후 메인 화면으로 이동
       setTimeout(() => {
         navigate("/main");
-      }, 1000);
+      }, 300);
     } else {
       alert("로그인 실패!");
-      navigate("/login-failed");
+      navigate("/login");
     }
   }, [navigate]);
 

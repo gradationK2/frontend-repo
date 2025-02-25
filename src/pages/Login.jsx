@@ -96,9 +96,6 @@ function Login() {
           <A.SocialLogin onClick={handleGoogleLogin}>
             <A.SocialImg src={google} />
           </A.SocialLogin>
-          <A.SocialLogin>
-            <A.SocialImg src={apple} />
-          </A.SocialLogin>
         </A.SocialLoginBox>
       </A.Login>
     </C.Common>

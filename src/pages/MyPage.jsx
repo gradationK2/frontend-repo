@@ -71,6 +71,8 @@ function MyPage() {
     navigate("/NextCollection", { state: { userId: user.id, userName: user.name } });
   };
 
+  console.log(`${process.env.REACT_APP_BASE_API_URL}`);
+
   return (
     <C.Common>
       <A.MyPage>
@@ -81,7 +83,8 @@ function MyPage() {
         <A.Hr />
 
         <A.MyInfoBox>
-          <A.MyPhoto src={img} />
+          <A.MyPhoto src={user?.profileImagePath ? `${process.env.REACT_APP_BASE_API_URL}${user.profileImagePath}` : img} />
+
           <A.MyInfo>
             {user ? (
               <>

@@ -11,7 +11,7 @@ function Profile() {
   const [formValue, setFormValue] = useState({
     name: "",
     nationality: "",
-    image: "",
+    profileImageFile: "",
   });
 
   useEffect(() => {
@@ -49,10 +49,10 @@ function Profile() {
         setFormValue((prev) => ({
           ...prev,
           image: reader.result, // 미리보기용 Base64 URL
-          profileImageFile: file, // 업로드용 파일 객체
+          profileImageFile: file, // 파일 객체 저장 (업로드용)
         }));
       };
-      reader.readAsDataURL(file); // 파일을 Base64로 변환하여 미리보기 설정
+      reader.readAsDataURL(file); // Base64 변환
     }
   };
 
@@ -82,8 +82,11 @@ function Profile() {
     formData.append("nationality", formValue.nationality);
 
     if (formValue.profileImageFile) {
-      formData.append("image", formValue.profileImageFile); // 필드명이 "image"가 맞는지 확인
+      formData.append("image", formValue.profileImageFile);
+      console.log("파일 타입 확인:", formValue.profileImageFile);
     }
+
+    console.log("보낼 데이터 확인:", formData.get("name"), formData.get("nationality"), formData.get("image"));
 
     try {
       const response = await axiosInstance.put("/api/user/me", formData, {
@@ -95,7 +98,7 @@ function Profile() {
       setFormValue((prev) => ({
         ...prev,
         image: response.data.profileImagePath || prev.image, // 서버에서 받은 이미지 경로 업데이트
-        profileImageFile: null, // 업로드 후 파일 객체 초기화
+        profileImageFile: null,
       }));
 
       alert("수정이 완료되었습니다.");
@@ -126,7 +129,7 @@ function Profile() {
             <A.Photo>
               <A.PhotoInput type="file" id="image_upload" accept="image/*" onChange={handleImgChange} />
               <A.PhotoLabel htmlFor="image_upload">
-                <A.PhotoImg src={basicImg} />
+                <A.PhotoImg src={formValue.image || basicImg} />
               </A.PhotoLabel>
             </A.Photo>
 

@@ -29,7 +29,7 @@ export const Title = styled.div`
   font-style: normal;
   font-weight: 600;
 
-  width: calc(100% + 24px);
+  width: calc(100% + 74px);
   display: flex;
   justify-content: center;
 `;
@@ -48,7 +48,9 @@ export const MyInfoBox = styled.div`
   gap: 20px;
 `;
 
-export const MyPhoto = styled.img``;
+export const MyPhoto = styled.img`
+  width: 80px;
+`;
 
 export const MyInfo = styled.div`
   display: flex;
