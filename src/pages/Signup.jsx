@@ -26,14 +26,29 @@ function Signup() {
     });
   };
 
+  const [emailMessage, SetEmailMessage] = useState(null);
+
   const UsableEmail = async (e) => {
     const email = formValue.email;
 
     try {
-      const response = await axiosInstance.get("/api/auth/check-email", { email });
-      console.log(response);
+      const response = await axiosInstance.post("/api/auth/check-email", { email });
+      SetEmailMessage(response.data);
     } catch (error) {
-      console.log(error);
+      SetEmailMessage(error.response.data);
+    }
+  };
+
+  const [nameMessage, SetNameMessage] = useState(null);
+
+  const UsableName = async (e) => {
+    const name = formValue.name;
+
+    try {
+      const response = await axiosInstance.post("/api/auth/check-name", { name });
+      SetNameMessage(response.data);
+    } catch (error) {
+      SetNameMessage(error.response.data);
     }
   };
 
@@ -79,9 +94,7 @@ function Signup() {
         alert("회원가입에 실패했습니다.");
       }
     } catch (error) {
-      console.log(process.env.REACT_APP_BASE_API_URL);
-
-      console.error("에러 발생:", error);
+      alert(error.response.data.error);
     }
   };
 
@@ -115,7 +128,7 @@ function Signup() {
             <A.Input type="email" name="email" value={formValue.email} onChange={handleChange} />
             <A.UsableBtn onClick={UsableEmail}>중복확인</A.UsableBtn>
           </A.InputDetailBox>
-          <A.SignupInfo>사용 가능한 이메일입니다.</A.SignupInfo>
+          <A.SignupInfo>{emailMessage}</A.SignupInfo>
         </A.InputBox>
         <A.InputBox>
           <A.Text>비밀번호</A.Text>
@@ -146,9 +159,9 @@ function Signup() {
           <A.Text>닉네임</A.Text>
           <A.InputDetailBox>
             <A.Input type="text" name="name" value={formValue.name} onChange={handleChange} placeholder="(필수)" />
-            <A.UsableBtn>중복확인</A.UsableBtn>
+            <A.UsableBtn onClick={UsableName}>중복확인</A.UsableBtn>
           </A.InputDetailBox>
-          <A.SignupInfo>사용 가능한 닉네임입니다.</A.SignupInfo>
+          <A.SignupInfo>{nameMessage}</A.SignupInfo>
         </A.InputBox>
         <A.Button onClick={handleSubmit}>가입하기</A.Button>
       </A.Signup>
