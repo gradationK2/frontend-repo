@@ -83,8 +83,12 @@ export const Sortitem = styled.div`
 
 export const CateItem = styled.div`
    font-size: 12px;
-
+   pointer-events: auto;
+   z-index: 10;
    cursor: pointer;
+   &.active{
+    font-weight: bold;
+   }
 
    &:hover{
     font-weight: bold;

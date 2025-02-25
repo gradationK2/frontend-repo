@@ -19,6 +19,7 @@ function Main() {
   const [selectedFoodCate, setSelectedFoodCate] = useState("라면");
 
   const handleCategorySelect = (index) => {
+    console.log("선택한 카테고리 인덱스:", index);
     setSelectCate(index); 
     setIsCategoryVisible(false);  
   };
@@ -29,6 +30,7 @@ function Main() {
   };
 
   const handleFoodCateClick = (cate) => {
+    console.log("선택한 카테고리 인덱스:", cate);
     setSelectedFoodCate(cate);
   };
 
