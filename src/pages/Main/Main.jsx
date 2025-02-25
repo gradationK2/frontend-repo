@@ -80,13 +80,13 @@ function Main() {
           </A.CateItem>
           <A.CateItem
             onClick={() => handleFoodCateClick("즉석 국·찌개")}
-            className={selectedFoodCate === "즉석 국•찌개" ? "active" : ""}
+            className={selectedFoodCate === "즉석 국·찌개" ? "active" : ""}
           >
             즉석 국•찌개
           </A.CateItem>
           <A.CateItem
             onClick={() => handleFoodCateClick("레토르트 음식")}
-            className={selectedFoodCate === "레토르트" ? "active" : ""}
+            className={selectedFoodCate === "레토르트 음식" ? "active" : ""}
           >
             레토르트
           </A.CateItem>
