@@ -55,6 +55,7 @@ function Food() {
         const fetchedUserId = response.data.id;
         setUserId(fetchedUserId);
         localStorage.setItem("userId", fetchedUserId);
+        console.log(fetchedUserId)
         await checkIfLiked(fetchedUserId);
       }
     } catch (error) {
