@@ -40,6 +40,8 @@ export const MyInfoBox = styled.div`
 
 export const MyPhoto = styled.img`
   width: 76px;
+  height: 76px;
+  border-radius: 100%;
 `;
 
 export const MyInfo = styled.div`
@@ -101,6 +103,9 @@ export const Top = styled.div`
 `;
 
 export const FoodName = styled.div`
+  width: 260px;
+  height: 20px;
+  overflow: hidden;
   font-family: Pretendard;
   font-size: 16px;
   font-style: normal;
@@ -108,7 +113,7 @@ export const FoodName = styled.div`
 
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: start;
   gap: 5px;
 
   position: relative;
@@ -118,6 +123,7 @@ export const FoodName = styled.div`
 export const Circle = styled.img`
   width: 7px;
   height: 7px;
+  margin-top: 6px;
 `;
 
 export const Stars = styled.div``;

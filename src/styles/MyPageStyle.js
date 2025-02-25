@@ -49,7 +49,9 @@ export const MyInfoBox = styled.div`
 `;
 
 export const MyPhoto = styled.img`
-  width: 80px;
+  width: 76px;
+  height: 76px;
+  border-radius: 100%;
 `;
 
 export const MyInfo = styled.div`

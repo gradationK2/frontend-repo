@@ -43,7 +43,9 @@ export const Photo = styled.div`
 `;
 
 export const PhotoImg = styled.img`
-  width: 80px;
+  width: 76px;
+  height: 76px;
+  border-radius: 100%;
 `;
 
 export const PhotoInput = styled.input`
