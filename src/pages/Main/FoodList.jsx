@@ -10,7 +10,7 @@ function FoodList({ category, sortType }) {
 
   useEffect(() => {
     const sortParam = sortType === "인기순" ? "popular" :  "new" ;
-
+   
     axios
       .get(`/api/food`, {
         params: {
@@ -23,6 +23,7 @@ function FoodList({ category, sortType }) {
       })
       .then((response) => {
         if (response.status === 200) {
+          console.log(response.data)
           setFoods(response.data);
     
         }
