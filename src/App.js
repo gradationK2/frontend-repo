@@ -17,6 +17,7 @@ import Like from "./pages/Like";
 import Collection from "./pages/Collection";
 import NextCollection from "./pages/NextCollection";
 import GoogleCallback from "./pages/GoogleCallback";
+import SearchResult from "./pages/Main/SearchResult";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/food/:id" element={<Food />} />
         <Route path="/review/:id" element={<Review />} />
         <Route path="Search" element={<Search />} />
+        <Route path="/result/:query" element={<SearchResult />} />
         {/* 검색 결과 화면 있으면 추가 */}
         <Route path="/writeReview/:id" element={<WriteReview />} />
         <Route path="mypage" element={<MyPage />} />

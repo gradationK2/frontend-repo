@@ -9,6 +9,58 @@ export const WriteReview = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 20px;
+    label{
+      
+        img{
+            width: 363px;
+            min-height: 284px;
+            height: auto;
+            object-fit: cover;
+        }
+
+    }
+    .carousel, .add_image{
+        width: 363px;
+        padding: 20px 0;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        position: relative;
+        left: 0;
+        >img{
+            width: 100%;
+            min-height: 284px;
+            height: auto;
+            object-fit: cover;
+        }
+        .right{
+            right: -10px;
+            z-index: 2;
+        }
+        .carousel-button{
+            pointer-events: auto;
+        }
+        button{
+            background-color:rgba(0, 0, 0, 0);
+            border: none;
+            position: absolute;
+          
+            left: -10px;
+            z-index: 100;
+            &.right{
+                transform: rotate(180deg); 
+                display: flex;  
+               img{
+                justify-content: end;
+               }
+            }
+            
+            img{
+                    width: 27px;
+                    height: 27px;
+                }
+        }
+    }
     .add_image{
         width: 100px;
         margin: 20px 0;
@@ -42,6 +94,17 @@ export const WriteReview = styled.div`
             outline: none;
             resize: none;
         }
+        &.foodname{
+            height: 40px;
+            display: flex;
+
+            align-items: center;
+            p{
+                font-size: 14px;
+                margin: 0 10px;
+                font-weight: 500;
+            }
+        }
     }
 
 `;
@@ -71,7 +134,7 @@ export const Spicy = styled.div`
 display: flex;
 gap: 5px;
         img{
-            height: 12px;
+            height: 27px;
         }
 `;
 
@@ -85,5 +148,9 @@ export const Button = styled.div`
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    margin-top: 40px;
+    margin: 40px 0;
+    cursor: pointer;
+    &:hover{
+        scale: calc(1.02);
+    }
 `;

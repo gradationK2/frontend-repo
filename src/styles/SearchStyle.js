@@ -4,6 +4,11 @@ import color from "./color";
 export const Search = styled.div`
     width: 393px;
     margin: 0 auto;
+    .spinner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const SearchBar = styled.div`
@@ -23,7 +28,7 @@ export const SearchBar = styled.div`
         width: 280px;
         border: none;
         outline: none;
-        height: 50px;
+        height: 30px;
         font-size: 14px;
     }
 
@@ -31,8 +36,9 @@ export const SearchBar = styled.div`
 
 
 export const Ranking = styled.div`
-    width: 100%;
+    width: 300px;
     height: 200px;
+    margin: 0 auto;
     background-color: #f7f7f7;
     padding: 40px;
     .title{
