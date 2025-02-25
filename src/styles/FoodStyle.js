@@ -290,6 +290,9 @@ export const Review = styled.div`
             gap: 5px;
             img{
                 width: 24px;
+                height: 24px;
+                border-radius: 50%;
+                object-fit: fill;
             }
             .name{
                 font-size: 16px;
@@ -305,10 +308,16 @@ export const Review = styled.div`
         }
     }
     .inner{
+        width: 210px;
+
+
         margin: 20px;
         .comment{
+            height: 70px;
+            overflow-y: auto;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 600; 
+            white-space: pre-wrap;
 
         }
 

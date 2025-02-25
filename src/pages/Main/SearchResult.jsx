@@ -7,6 +7,7 @@ import test from "../../assets/main/dummy.png";
 import spinner from "../../assets/main/Spinner@1x-1.0s-200px-200px.gif";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Forward from "../../assets/main/Forward.svg";
 
 const SearchResult = () => {
   const { query } = useParams();
@@ -50,19 +51,23 @@ const SearchResult = () => {
     <C.Common>
       <A.Search>
         <A.SearchBar>
-          <img src={searchIcon} alt="검색" />
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="검색어를 입력하세요."
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-            }}
-          />
+          <div className="back" onClick={() => navigate(-1)}> <img src={Forward} alt="" /> </div>
+          <div className="search">
+            <img src={searchIcon} alt="검색" onClick={handleSearch} />
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder="검색어를 입력하세요."
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+            />
+          </div>
         </A.SearchBar>
+        
         {results.length > 0 ? (
           <F.FoodList>
             {results.map((result) => (
@@ -79,7 +84,7 @@ const SearchResult = () => {
           </F.FoodList>
         ) : (
           <div className="spinner">
-            <img src={spinner}/>
+            <img src={spinner} />
           </div>
 
         )}

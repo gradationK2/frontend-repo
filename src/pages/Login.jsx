@@ -46,7 +46,7 @@ function Login() {
 
       if (token) {
         console.log("로그인 성공");
-        localStorage.setItem("accessToken", token.accessToken);
+      
 
         if (autoLogin) {
           localStorage.setItem("refreshToken", token.refreshToken); // 자동 로그인 체크 시 localStorage에 저장

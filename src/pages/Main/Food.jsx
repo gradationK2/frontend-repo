@@ -21,7 +21,7 @@ import axios from "axios";
 function Food() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const token = localStorage.getItem("accessToken");
+  const token = sessionStorage.getItem("accessToken");
   const [reviews, setReviews] = useState([]);
   const [foodDetail, setFoodDetail] = useState({});
   const [liked, setLiked] = useState(false);
@@ -33,7 +33,6 @@ function Food() {
       const response = await axios.get(`/api/food/detail/${id}`);
       if (response.status === 200) {
         setFoodDetail(response.data);
-        console.log(response.data);
       }
     } catch (error) {
       console.error("음식 상세 데이터를 가져오는 중 오류 발생:", error);
@@ -55,7 +54,6 @@ function Food() {
         const fetchedUserId = response.data.id;
         setUserId(fetchedUserId);
         localStorage.setItem("userId", fetchedUserId);
-        console.log(fetchedUserId)
         await checkIfLiked(fetchedUserId);
       }
     } catch (error) {
@@ -83,7 +81,6 @@ function Food() {
         .get(`/reviews/food/${id}`, { headers: { Authorization: `Bearer ${token}` } })
         .then((response) => {
           setReviews(response.data.reviews);
-          console.log(response.data.reviews);
         })
         .catch((error) => {
           console.error("리뷰를 가져오는 중 오류 발생:", error);
@@ -150,7 +147,7 @@ function Food() {
     switch (foodDetail.spicyLevelText) {
       case "안 매움":
         return nothot;
-      case "약간 매움":
+      case "보통":
         return littlehot;
       case "매움":
         return hot;
@@ -163,7 +160,7 @@ function Food() {
     switch (foodDetail.spicyLevelText) {
       case "안 매움":
         return "맵지 않아요!";
-      case "약간 매움":
+      case "보통":
         return "조금 매워요.";
       case "매움":
         return "매운 편이에요!";
@@ -242,19 +239,18 @@ function Food() {
               </div>
               <div className="review_wrap">
                 {reviews && reviews.length > 0 ? (
-                 reviews.map((review, index) => (
+                  reviews.map((review, index) => (
                     <A.Review key={index}>
                       <div className="top">
                         <div className="profile">
-                          <img src={profil} alt={review.member?.name} />
+                          <img src={review.member?.photoUrl || profil} alt={review.member?.name} />
                           <div className="name">{review.member?.name}</div>
-                         
                         </div>
                         <div className="spicy_score">
-                            {Array.from({ length: review.spicyLevel }).map((_, idx) => (
-                              <img key={idx} src={pepper} alt="매운맛" />
-                            ))}
-                          </div>
+                          {Array.from({ length: review.spicyLevel }).map((_, idx) => (
+                            <img key={idx} src={pepper} alt="매운맛" />
+                          ))}
+                        </div>
                       </div>
                       <div className="inner">
                         <p className="comment">{review.content}</p>

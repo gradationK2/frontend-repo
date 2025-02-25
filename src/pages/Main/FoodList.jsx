@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import test from "../../assets/main/dummy.png";
 import * as A from "../../styles/FoodStyle";
 
 function FoodList({ category, sortType }) {
@@ -23,7 +22,6 @@ function FoodList({ category, sortType }) {
       })
       .then((response) => {
         if (response.status === 200) {
-          console.log(response.data)
           setFoods(response.data);
     
         }

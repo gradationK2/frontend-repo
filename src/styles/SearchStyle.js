@@ -12,20 +12,38 @@ export const Search = styled.div`
 `;
 
 export const SearchBar = styled.div`
-    margin: 20px auto;
-    width: 343px;
-    height: 53px;
 
-    border-radius: 200px;
-    border: 1px solid transparent;
+    margin: 20px auto;
+
+    height: 53px;
+    position: relative;
+   
+    
+    display: flex;
+    justify-content: space-around;
+    .search{
+        width: 320px;
+        border: 1px solid transparent;
     background-image: linear-gradient(#fff, #fff), ${color.gradation};
     background-origin: border-box;
     background-clip: content-box, border-box;
-    display: flex;
+        display: flex;
+        border-radius: 200px;
     justify-content: center;
     align-items: center;
+    }
+    .back{
+        transform: rotate(90deg);
+       
+        img{
+            width: 24px;
+            height: 24px;
+          
+            top: 0;
+        }
+    }
     input{
-        width: 280px;
+        width: 250px;
         border: none;
         outline: none;
         height: 30px;
@@ -64,8 +82,10 @@ export const Ranking = styled.div`
         gap: 15px;
         font-size: 14px;
         font-weight: 600;
+        
         span{
             margin-left: 15px;
+            cursor: pointer;
         }
         .first{
             color: ${color.red};
