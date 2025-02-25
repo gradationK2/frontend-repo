@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const MyPage = styled.div`
   padding: 0 25px;
-  margin-top: 5vh;
+  margin-top: 2vh;
 `;
 
 export const Header = styled.div`

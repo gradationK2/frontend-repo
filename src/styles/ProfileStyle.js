@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Profile = styled.div`
-  margin-top: 5vh;
+  margin-top: 2vh;
 `;
 
 export const section = styled.div`

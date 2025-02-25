@@ -64,14 +64,12 @@ function MyPage() {
   };
 
   const goReview = () => {
-    navigate("/MyReview", { state: { userId: user.id, userPhoto: user.PhotoUrl, userName: user.name } });
+    navigate("/MyReview", { state: { userId: user.id } });
   };
 
   const goNextBadge = () => {
     navigate("/NextCollection", { state: { userId: user.id, userName: user.name } });
   };
-
-  console.log(`${process.env.REACT_APP_BASE_API_URL}`);
 
   return (
     <C.Common>

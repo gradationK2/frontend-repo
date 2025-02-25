@@ -4,7 +4,7 @@ import nextleft from "../assets/nextright.svg";
 
 export const NextCollection = styled.div`
   padding: 0 25px;
-  margin-top: 5vh;
+  margin-top: 2vh;
 `;
 
 export const Header = styled.div`

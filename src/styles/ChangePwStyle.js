@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const ChangePw = styled.div`
-  margin-top: 5vh;
+  margin-top: 2vh;
   padding: 0 25px;
 `;
 
