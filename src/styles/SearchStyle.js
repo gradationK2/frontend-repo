@@ -4,6 +4,11 @@ import color from "./color";
 export const Search = styled.div`
     width: 393px;
     margin: 0 auto;
+    .spinner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 `;
 
 export const SearchBar = styled.div`

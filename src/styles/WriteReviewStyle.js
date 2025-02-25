@@ -35,6 +35,7 @@ export const WriteReview = styled.div`
         }
         .right{
             right: -10px;
+            z-index: 2;
         }
         .carousel-button{
             pointer-events: auto;
@@ -148,4 +149,8 @@ export const Button = styled.div`
     align-items: center;
     font-size: 16px;
     margin: 40px 0;
+    cursor: pointer;
+    &:hover{
+        scale: calc(1.02);
+    }
 `;

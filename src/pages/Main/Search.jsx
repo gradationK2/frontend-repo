@@ -5,6 +5,7 @@ import searchIcon from "../../assets/main/Search.svg";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+
 function Search() {
   const [searchText, setSearchText] = useState("");
   const [popular, setPopular] = useState([]);
@@ -15,7 +16,7 @@ function Search() {
       .get("/api/food", { params: { sort: "popular" } })
       .then((response) => {
         if (response.status === 200) {
-          setPopular(response.data.slice(0, 5)); // 인기 검색어 5개만 표시
+          setPopular(response.data.slice(0, 5)); 
         }
       })
       .catch((error) => {

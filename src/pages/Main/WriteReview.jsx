@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Forward from "../../assets/main/Forward.svg";
 import pepper from "../../assets/main/pepper.png";
 import graypepper from "../../assets/main/graypepper.svg";
@@ -7,24 +7,33 @@ import camera from "../../assets/main/Camera.png";
 import * as C from "../../styles/CommonStyle";
 import * as A from "../../styles/WriteReviewStyle";
 import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
 
 function WriteReview() {
   const navigate = useNavigate();
   const location = useLocation();
   const { foodId, foodName } = location.state || {};
+  const token = localStorage.getItem("accessToken");
 
   const [selectedImages, setSelectedImages] = useState([]);
+  const [selectedFiles, setSelectedFiles] = useState([]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSpicy, setSelectedSpicy] = useState(0);
+  const [reviewContent, setReviewContent] = useState("");
+
+  const fileInputRef = useRef(null);
 
   const handleImageUpload = (event) => {
     const files = event.target.files;
     if (files.length > 0) {
       const newImages = [];
+      const newFiles = [];
       for (let i = 0; i < files.length; i++) {
         newImages.push(URL.createObjectURL(files[i]));
+        newFiles.push(files[i]);
       }
       setSelectedImages(newImages);
+      setSelectedFiles(newFiles);
       setCurrentImageIndex(0);
     }
   };
@@ -33,25 +42,56 @@ function WriteReview() {
     setSelectedSpicy(level);
   };
 
-  const handlePrevImage = () => {
+  const handlePrevImage = (e) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) => (prev > 0 ? prev - 1 : prev));
   };
 
-  const handleNextImage = () => {
+  const handleNextImage = (e) => {
+    e.stopPropagation();
     setCurrentImageIndex((prev) =>
       prev < selectedImages.length - 1 ? prev + 1 : prev
     );
   };
 
-  const sendReview = () => {
-    alert('리뷰 작성 완료!')
-    navigate(-1);
-  }
+  const sendReview = async () => {
+    const userId = localStorage.getItem("userId");
+    const formData = new FormData();
+    formData.append("foodId", foodId);
+    formData.append("userId", userId);
+    formData.append("content", reviewContent);
+    formData.append("spicyLevel", selectedSpicy);
+
+    if (selectedFiles && selectedFiles.length > 0) {
+      selectedFiles.forEach((file) => {
+        formData.append("image", file);
+      });
+    } else {
+      formData.append("image", "null");
+    }
+
+    try {
+      const response = await axios.post("/reviews", formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (response.status === 200 || response.status === 201) {
+        alert("리뷰 작성 완료!");
+        navigate(-1);
+      } else {
+        throw new Error("리뷰 전송 실패");
+      }
+    } catch (error) {
+      console.error("Error posting review:", error);
+      alert("리뷰 작성에 실패했습니다. 다시 시도해주세요.");
+    }
+  };
 
   return (
     <C.Common>
       <A.Header>
-        <img src={Forward} alt="" onClick={() => navigate(-1)} />
+        <img src={Forward} alt="뒤로가기" onClick={() => navigate(-1)} />
         <div className="name">리뷰 쓰기</div>
       </A.Header>
 
@@ -62,10 +102,16 @@ function WriteReview() {
               <img src={camera} alt="사진 업로드" />
             </label>
           ) : (
-            <div className="carousel">
+            <div
+              className="carousel"
+              onClick={() => fileInputRef.current.click()}
+            >
               {selectedImages.length > 1 && (
-                <button onClick={handlePrevImage} className="carousel-button left">
-                 <img src={foward} alt="" />
+                <button
+                  onClick={handlePrevImage}
+                  className="carousel-button left"
+                >
+                  <img src={foward} alt="" />
                 </button>
               )}
               <img
@@ -74,7 +120,10 @@ function WriteReview() {
                 className="preview_main"
               />
               {selectedImages.length > 1 && (
-                <button onClick={handleNextImage} className="carousel-button right">
+                <button
+                  onClick={handleNextImage}
+                  className="carousel-button right"
+                >
                   <img src={foward} alt="" />
                 </button>
               )}
@@ -87,6 +136,7 @@ function WriteReview() {
             multiple
             style={{ display: "none" }}
             onChange={handleImageUpload}
+            ref={fileInputRef}
           />
         </div>
 
@@ -112,10 +162,14 @@ function WriteReview() {
           <p>{foodName}</p>
         </div>
         <div className="input">
-          <textarea placeholder="구매하신 상품에 대한 리뷰를 남겨주세요."></textarea>
+          <textarea
+            placeholder="구매하신 상품에 대한 리뷰를 남겨주세요."
+            value={reviewContent}
+            onChange={(e) => setReviewContent(e.target.value)}
+          ></textarea>
         </div>
 
-        <A.Button onClick={() => sendReview()}>작성하기</A.Button>
+        <A.Button onClick={sendReview}>작성하기</A.Button>
       </A.WriteReview>
     </C.Common>
   );

@@ -16,6 +16,12 @@ export const Food = styled.div`
             height: 192px;
         }
     }
+    .loading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
 `;
 export const FoodList = styled.div`
     display:grid;
@@ -202,6 +208,7 @@ export const Section = styled.div`
 
 export const Reviews = styled.div`
     margin-top: -5px;
+
     padding: 0 25px ;
     padding-bottom: 35px;
    white-space: nowrap;
@@ -251,13 +258,11 @@ export const Reviews = styled.div`
     
     }
     .review_wrap{
-            width: 100%;
+    
             overflow-x: scroll;
             display: flex;
             gap: 10px;
             white-space: nowrap;
-           
-
         }
         ::-webkit-scrollbar {
                 display: none;  
@@ -265,7 +270,9 @@ export const Reviews = styled.div`
 `;
 
 export const Review = styled.div`
-    width: 245px;
+    width: 245px !important;
+   
+    flex-shrink: 0;
     height: 142px;
     border-radius: 8px;
     border: 1px solid transparent;
@@ -273,7 +280,7 @@ export const Review = styled.div`
     background-origin: border-box;
     background-clip: content-box, border-box;
     .top{
-        margin: 20px ;
+        margin: 20px;
         display: flex;
         justify-content: space-between;
         align-items: center;

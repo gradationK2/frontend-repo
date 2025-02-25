@@ -53,6 +53,7 @@ export const Header = styled.div`
 export const ReviewItem = styled.div`
     padding: 25px;
     position: relative;
+    
     border-bottom: 3px solid ${color.gray};
     .images{
         margin: 15px 0;

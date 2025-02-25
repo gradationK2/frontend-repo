@@ -4,6 +4,7 @@ import * as A from "../../styles/SearchStyle";
 import searchIcon from "../../assets/main/Search.svg";
 import * as F from "../../styles/FoodStyle";
 import test from "../../assets/main/dummy.png";
+import spinner from "../../assets/main/Spinner@1x-1.0s-200px-200px.gif";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -77,7 +78,10 @@ const SearchResult = () => {
             ))}
           </F.FoodList>
         ) : (
-          <p>검색 결과가 없습니다.</p>
+          <div className="spinner">
+            <img src={spinner}/>
+          </div>
+
         )}
       </A.Search>
     </C.Common>
