@@ -4,7 +4,7 @@ import axiosInstance from "../api/axiosInstance";
 import * as A from "../styles/CollectionStyle";
 import * as C from "../styles/CommonStyle";
 import forward from "../assets/Forward.svg";
-import badge from "../assets/badge.svg";
+import badgeImg from "../assets/badge.svg";
 
 function Collection() {
   const navigate = useNavigate();
@@ -30,6 +30,8 @@ function Collection() {
     navigate(-1);
   };
 
+  const BASE_URL = process.env.REACT_APP_BASE_API_URL;
+
   return (
     <C.Common>
       <A.Collection>
@@ -50,7 +52,7 @@ function Collection() {
               badgeItems.map((badge, index) => (
                 <A.Badge key={index}>
                   {/* 배찌 이미지 안 불러와져서 임의로 프론트에서 넣음 */}
-                  <A.BadgeImg src={badge.imagePath ? badge.imagePath : badge} alt={badge.name} />
+                  <A.BadgeImg src={badgeImg} alt={badge.name} />
                   <A.BadgeTitle>{badge.name}</A.BadgeTitle>
                 </A.Badge>
               ))

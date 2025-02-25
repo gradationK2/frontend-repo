@@ -77,7 +77,8 @@ export const Badges = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: start;
-  gap: 30px;
+  margin-left: 70px;
+  gap: 40px;
   overflow-y: scroll;
   //스크롤바 안 보이게 하는 코드
   -ms-overflow-style: none;
@@ -91,6 +92,7 @@ export const Badge = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: start;
 `;
 
 export const BadgeImg = styled.img`

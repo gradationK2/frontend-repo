@@ -37,7 +37,9 @@ export const Title = styled.div`
 
 export const LikeBox = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: start;
+  flex-wrap: wrap;
+  margin-left: 10px;
   gap: 3vw;
 `;
 

@@ -31,7 +31,8 @@ function NextCollection() {
     navigate(-1);
   };
 
-  const progress = (badgeItems.currentCount / (badgeItems.requiredCount + badgeItems.currentCount)) * 100;
+  const progress = (badgeItems.currentCount / (badgeItems.requiredCount + badgeItems.currentCount)) * 1000;
+  console.log(progress);
 
   return (
     <C.Common>
